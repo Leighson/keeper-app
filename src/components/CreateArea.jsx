@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-  const [note, setNote] = useState({
+
+  const emptyNote = {
     title: "",
-    content: "",
-  });
+    content: ""
+  }
+
+  const [note, setNote] = useState(emptyNote);
 
   function handleChange(event) {
     const inputName = event.target.name;
@@ -14,20 +17,14 @@ function CreateArea(props) {
       title: inputName === "title" ? inputValue : note.title,
       content: inputName === "content" ? inputValue : note.content,
     });
-
-    console.log(note);
   }
 
   function addNote(event) {
     props.setNoteDatabase((prevNotes) => {
-      return [...prevNotes, note]
+      return [...prevNotes, note];
     });
 
-    setNote({
-      title: "",
-      content: "",
-    });
-
+    setNote(emptyNote);
     event.preventDefault();
   }
 

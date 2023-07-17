@@ -6,7 +6,7 @@ import CreateArea from "./CreateArea";
 
 function generateKey() {
   let date = new Date();
-  return date.getTime() + Math.random;
+  return date.getTime() + Math.random();
 }
 
 function App() {
