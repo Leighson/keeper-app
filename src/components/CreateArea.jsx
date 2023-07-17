@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-
   const emptyNote = {
+    id: "",
     title: "",
-    content: ""
-  }
+    content: "",
+  };
 
   const [note, setNote] = useState(emptyNote);
+
+  function generateKey() {
+    let date = new Date();
+    return date.getTime() + Math.random();
+  }
 
   function handleChange(event) {
     const inputName = event.target.name;
     const inputValue = event.target.value;
 
     setNote({
+      id: "",
       title: inputName === "title" ? inputValue : note.title,
       content: inputName === "content" ? inputValue : note.content,
     });
   }
 
   function addNote(event) {
+    note.id = generateKey();
+    
     props.setNoteDatabase((prevNotes) => {
       return [...prevNotes, note];
     });
