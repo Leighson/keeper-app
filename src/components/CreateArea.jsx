@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import AddIcon from "@mui/icons-material/Add";
 
 function CreateArea(props) {
   const emptyNote = {
@@ -9,6 +10,8 @@ function CreateArea(props) {
   };
 
   const [note, setNote] = useState(emptyNote);
+  const [isHidden, setIsHidden] = useState(true);
+  const [numRows, setNumRows] = useState(1);
 
   const generateKey = () => {
     let date = new Date();
@@ -24,7 +27,12 @@ function CreateArea(props) {
       title: inputName === "title" ? inputValue : note.title,
       content: inputName === "content" ? inputValue : note.content,
     });
-  }
+  };
+
+  const handleFocus = () => {
+    setIsHidden(false);
+    setNumRows(3);
+  };
 
   const addNote = (event) => {
     note.id = generateKey();
@@ -34,26 +42,30 @@ function CreateArea(props) {
     });
 
     setNote(emptyNote);
+    setIsHidden(true);
+    setNumRows(1);
     event.preventDefault();
-  }
+  };
 
   return (
     <div>
-      <form onSubmit={addNote}>
+      <form className="create-note" onSubmit={addNote}>
         <input
           name="title"
           placeholder="Title"
           onChange={handleChange}
           value={note.title}
+          hidden={isHidden}
         />
         <textarea
           name="content"
           placeholder="Take a note..."
-          rows="3"
+          rows={numRows}
           onChange={handleChange}
+          onFocus={handleFocus}
           value={note.content}
         />
-        <Button text="Add" type="submit" onClick={addNote} />
+        <Button text=<AddIcon /> type="submit" onClick={addNote} />
       </form>
     </div>
   );

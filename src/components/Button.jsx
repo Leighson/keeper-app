@@ -1,10 +1,14 @@
 import React from "react";
+import Fab from "@mui/material/Fab";
+import Zoom from "@mui/material/Zoom";
 
 function Button(props) {
   return (
-    <button type={props.type} onClick={props.onClick}>
-      {props.text}
-    </button>
+    <Zoom in={true}>
+      <Fab type={props.type} onClick={props.onClick}>
+        {props.text}
+      </Fab>
+    </Zoom>
   );
 }
 
