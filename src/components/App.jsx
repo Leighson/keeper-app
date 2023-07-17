@@ -15,9 +15,7 @@ function App() {
         return (
           <Note
             key={note.id}
-            id={note.id}
-            title={note.title}
-            content={note.content}
+            note={note}
             setNoteDatabase={setNoteDatabase}
           />
         );

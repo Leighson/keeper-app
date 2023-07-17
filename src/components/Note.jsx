@@ -1,19 +1,22 @@
 import React from "react";
+import Button from "./Button";
 
 function Note(props) {
-  function deleteNote() {
+  const deleteNote = () => {
     props.setNoteDatabase((prevNotes) => {
-      return prevNotes.filter((note) => note.id !== props.id)
-    })
-  }
+      return prevNotes.filter((note) => note !== props.note);
+    });
+  };
 
   return (
     <div className="note">
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
-      <button type="button" onClick={() => {deleteNote()}}>
-        DELETE
-      </button>
+      <h1>{props.note.title}</h1>
+      <p>{props.note.content}</p>
+      <Button
+        text="DELETE"
+        type="button"
+        onClick={deleteNote}
+      />
     </div>
   );
 }

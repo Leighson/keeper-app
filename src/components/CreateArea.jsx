@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 
 function CreateArea(props) {
   const emptyNote = {
@@ -9,12 +10,12 @@ function CreateArea(props) {
 
   const [note, setNote] = useState(emptyNote);
 
-  function generateKey() {
+  const generateKey = () => {
     let date = new Date();
     return date.getTime() + Math.random();
-  }
+  };
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
 
@@ -25,9 +26,9 @@ function CreateArea(props) {
     });
   }
 
-  function addNote(event) {
+  const addNote = (event) => {
     note.id = generateKey();
-    
+
     props.setNoteDatabase((prevNotes) => {
       return [...prevNotes, note];
     });
@@ -52,9 +53,7 @@ function CreateArea(props) {
           onChange={handleChange}
           value={note.content}
         />
-        <button type="submit" onClick={addNote}>
-          Add
-        </button>
+        <Button text="Add" type="submit" onClick={addNote} />
       </form>
     </div>
   );
